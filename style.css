@@ -94,6 +94,10 @@ body {
     border-width: 0px;
 }
 
+.select_with_checkbox option {
+    padding-bottom: 0;
+}
+
 .select_with_checkbox option::before {
     content: "\2610 \2002";
 }
