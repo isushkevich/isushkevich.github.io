@@ -83,6 +83,7 @@ const applyFunction = (event) => {
     if (currentCheckbox[0].selected && currentCheckbox[0].value === "0") { // update currently_selected component if "все объекты" is selected
         currentlySelected[id].innerHTML = "Выбраны все объекты";
         showSelected[id].innerHTML = "Показать выбранное (" + currentCheckbox.length + ")";
+        alert("Выбраны все объекты");
         closeModalWindow(id);
         return;
     }
@@ -98,9 +99,11 @@ const applyFunction = (event) => {
     if (selectedIndexes.length) {
         currentlySelected[id].innerHTML = "Выбрано: " + selectedIndexes.join(", ");
         showSelected[id].innerHTML = "Показать выбранное (" + selectedIndexes.length + ")";
+        alert("Выбрано: " + selectedIndexes.join(", "));
     } else {
         currentlySelected[id].innerHTML = "Код ОКРБ или наименование закупаемой продукции";
         showSelected[id].innerHTML = "Показать выбранное (0)";
+        alert("Не выбрано ничего");
     }
 
     closeModalWindow(id);
