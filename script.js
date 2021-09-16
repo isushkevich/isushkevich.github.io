@@ -1,5 +1,20 @@
 "use strict";
 
+// add IDs to elements for later usage
+const numberOfComponents = 2;
+
+for (let i = 0; i < numberOfComponents; i++) {
+    document.getElementsByClassName("show_selected_button")[i].dataset.id = i;
+    document.getElementsByClassName("currently_selected")[i].dataset.id = i;
+    document.getElementsByClassName("modal_select_window")[i].dataset.id = i;
+    document.getElementsByClassName("back_arrow")[i].dataset.id = i;
+    document.getElementsByClassName("modal_search_box")[i].dataset.id = i;
+    document.getElementsByClassName("select_with_checkbox")[i].dataset.id = i;
+    document.getElementsByClassName("apply_button")[i].dataset.id = i;
+    document.getElementsByClassName("clear_button")[i].dataset.id = i;
+}
+
+
 // open and close modal window functionality
 const currentlySelected = document.getElementsByClassName("currently_selected");
 
@@ -19,6 +34,7 @@ for (let i = 0; i < showSelected.length; i++) {
     showSelected[i].addEventListener("click", e => showModalWindow(e.target.dataset.id));
 }
 
+
 const backArrows = document.getElementsByClassName("back_arrow");
 
 for (let i = 0; i < backArrows.length; i++) {
@@ -31,7 +47,7 @@ const closeModalWindow = (windowId) => {
 }
 
 
-// checkbox funtionality
+// checkbox and buttons funtionality
 const checkboxSelect = document.getElementsByClassName("select_with_checkbox");
 
 for (let i = 0; i < checkboxSelect.length; i++) {  // set checkbox field size to fit all content
@@ -78,11 +94,11 @@ const applyFunction = (event) => {
     }
 
     if (selectedIndexes.length) {
-        currentlySelected[id].innerHTML = "Выбрано: " + selectedIndexes.toString();
+        currentlySelected[id].innerHTML = "Выбрано: " + selectedIndexes.join(", ");
         showSelected[id].innerHTML = "Показать выбранное (" + selectedIndexes.length + ")";
     } else {
         currentlySelected[id].innerHTML = "Код ОКРБ или наименование закупаемой продукции";
-        showSelected[id].innerHTML = "Показать выбранное";
+        showSelected[id].innerHTML = "Показать выбранное (0)";
     }
 
     closeModalWindow(id);
@@ -103,17 +119,20 @@ const clearFunction = (event) => {
     }
 }
 
+// search
+// const searchBoxes = document.getElementsByClassName("modal_search_box");
 
+// for (let i = 0; i < searchBoxes.length; i++) {
+//     searchBoxes[i].addEventListener("input", e => searchFunction(e));
+// }
 
-// const searchBox = document.getElementsByClassName("modal_search_box")[0];
-
-// searchBox.addEventListener("input", e => searchFunction(e));
 
 // const searchFunction = (e) => {
 //     console.log(e.target.dataset.id, e.target.value);
-//     for (let i = 0; i < checkboxSelect.length; i++) {
-//         if (checkboxSelect[i].innerText.search(e.target.value) === -1) {
-//             checkboxSelect[i].remove();
+
+//     for (let i = 0; i < 12; i++) {
+//         if (checkboxSelect[0][i].innerText.indexOf(e.target.value) === -1) {
+//             checkboxSelect[0][i].remove();
 //         } else {
 //             console.log(checkboxSelect[i]);
 //         }

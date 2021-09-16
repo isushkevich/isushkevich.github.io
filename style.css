@@ -64,9 +64,6 @@ body {
 
 .modal_back_and_heading {
     margin-left: 20px;
-}
-
-.modal_back_and_heading {
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -99,9 +96,6 @@ body {
 
 .select_with_checkbox option::before {
     content: "\2610 \2002";
-    /* width: 1.3em;
-    text-align: center;
-    display: inline-block; */
 }
 
 .select_with_checkbox option:checked::before {
