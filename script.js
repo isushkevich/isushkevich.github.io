@@ -61,7 +61,8 @@ for (let i = 0; i < checkboxSelect.length; i++) {
 const handleCheckboxClick = (event) => {
     if (event.target.value === "0") { // select every item if "все объекты" is selected
         const currentCheckbox = checkboxSelect[event.target.parentElement.dataset.id];
-        for (let i = 0; i < currentCheckbox.length; i++) {
+        const itemsNumber = currentCheckbox.length;
+        for (let i = 0; i < itemsNumber; i++) {
             currentCheckbox[i].selected = true;
         }
     }
@@ -77,6 +78,7 @@ for (let i = 0; i < applyButtons.length; i++) {
 const applyFunction = (event) => {
     const id = event.target.dataset.id;
     const currentCheckbox = checkboxSelect[id];
+    const itemsNumber = currentCheckbox.length;
 
     if (currentCheckbox[0].selected && currentCheckbox[0].value === "0") { // update currently_selected component if "все объекты" is selected
         currentlySelected[id].innerHTML = "Выбраны все объекты";
@@ -85,9 +87,9 @@ const applyFunction = (event) => {
         return;
     }
 
-    const selectedIndexes = []; //otherwise update currently_selected with what's selected
+    const selectedIndexes = []; // otherwise update currently_selected with what's selected
 
-    for (let i = 0; i < currentCheckbox.length; i++) {
+    for (let i = 0; i < itemsNumber; i++) {
         if (currentCheckbox[i].selected) {
             selectedIndexes.push(currentCheckbox[i].value);
         }
@@ -119,22 +121,26 @@ const clearFunction = (event) => {
     }
 }
 
-// search
-// const searchBoxes = document.getElementsByClassName("modal_search_box");
+// search functionality
+const searchBoxes = document.getElementsByClassName("modal_search_box");
 
-// for (let i = 0; i < searchBoxes.length; i++) {
-//     searchBoxes[i].addEventListener("input", e => searchFunction(e));
-// }
+for (let i = 0; i < searchBoxes.length; i++) {
+    searchBoxes[i].addEventListener("input", e => searchFunction(e));
+}
 
+const searchFunction = (e) => {
+    const id = e.target.dataset.id;
+    const searchQuery = e.target.value.toUpperCase(); // to make the search query registry independent
+    const currentCheckbox = checkboxSelect[id];
+    const itemsNumber = currentCheckbox.length;
 
-// const searchFunction = (e) => {
-//     console.log(e.target.dataset.id, e.target.value);
+    for (let i = 0; i < itemsNumber; i++) {
+        const itemName = currentCheckbox[i].innerText.toUpperCase();
 
-//     for (let i = 0; i < 12; i++) {
-//         if (checkboxSelect[0][i].innerText.indexOf(e.target.value) === -1) {
-//             checkboxSelect[0][i].remove();
-//         } else {
-//             console.log(checkboxSelect[i]);
-//         }
-//     }
-// }
+        if (itemName.indexOf(searchQuery) === -1) {
+            currentCheckbox[i].style.display = "none";
+        } else {
+            currentCheckbox[i].style.display = "block";
+        }
+    }
+}
